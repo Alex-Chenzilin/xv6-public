@@ -392,6 +392,7 @@ copyout(pde_t *pgdir, uint va, void *p, uint len)
   return 0;
 }
 
+// mprotect change the protection bits of the page range
 int mprotect(void *addr, int len) {
   struct proc *curproc = myproc();
   if ((uint)addr >= curproc->vlimit || (uint)addr + len >= curproc->vlimit)
@@ -412,6 +413,8 @@ int mprotect(void *addr, int len) {
   lcr3(V2P(curproc->pgdir)); // update page flag
   return 0;
 }
+
+//sets the region back to both readable and writeable.
 int munprotect(void *addr, int len) {
   struct proc *curproc = myproc();
   if ((uint)addr >= curproc->vlimit || (uint)addr + len >= curproc->vlimit)

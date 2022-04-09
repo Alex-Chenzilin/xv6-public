@@ -95,6 +95,8 @@ int sys_mprotect(void) {
   void *addr;
   int len;
 
+//Fetch the  word-sized system a block of memory of size bytes
+  
   if (argptr(0, (char **)&addr, sizeof(void *)) || argint(1, &len) < 0)
     return -1;
   if ((uint)addr % PGSIZE != 0 || len <= 0 || (uint)addr < PGSIZE)
